@@ -6,9 +6,10 @@ local dirs = {}
 local spaces = {}
 
 -- init
-for i,d in pair(disks) do
+for i,d in ipairs(disks) do
     local dir = d.getMountPath()
     if dir then
+        print("AVAIL disk: "..dir)
         table.insert(dirs,dir)
     end
 end
@@ -22,6 +23,7 @@ end
 function write(name,content)
     getSize()
     local file_size = string.len(content)
+    local wdisks = {}
     local get = 1
     for i,v in ipairs(dirs) do
         local space = spaces[v]
@@ -32,16 +34,18 @@ function write(name,content)
             local writing = fs.open(v.."/"..name,"w")
             writing.write(write)
             writing.close()
+            table.insert(wdisks,v)
             if get > file_size then
                 break
             end
         end
+        print("wrote "..name.."to "..table.concat(wdisks,", "))
     end
 end
 
 function read(name)
     local r = ""
-    for i,v in pairs(dirs) do
+    for i,v in ipairs(dirs) do
         local dir = v.."/"..name
         if fs.exists(dir) then
             local read = fs.open(dir,"r")
