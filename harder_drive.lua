@@ -1,5 +1,5 @@
 local disks = {peripheral.find("drive")}
-peripheral.find("modem",rednet.open())
+peripheral.find("modem",rednet.open)
 
 local dirs = {}
 
