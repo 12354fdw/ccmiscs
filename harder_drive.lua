@@ -36,10 +36,10 @@ function write(name,content)
             writing.close()
             table.insert(wdisks,v)
             if get > file_size then
+                print("wrote "..name.."to "..table.concat(wdisks,", "))
                 break
             end
         end
-        print("wrote "..name.."to "..table.concat(wdisks,", "))
     end
 end
 
@@ -62,7 +62,6 @@ while true do
     while true do
         write("TESTy"..i, "1234567890")
         local data = read("TESTy" .. i)
-        print(data)
         
         i = i + 1
         sleep(1)
