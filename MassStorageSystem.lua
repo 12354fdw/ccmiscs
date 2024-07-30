@@ -39,6 +39,15 @@ local logtitle = window.create(term.current(),2,(h/2)+3,w-2,1)
 logtitle.setBackgroundColor(colors.gray)
 logtitle.setTextColor(colors.lightGray)
 
+function table.find(list,element)
+    for i,v in pairs(list) do
+        if v == element then
+            return i
+        end
+    end
+    return nil
+end
+
 function log(log,color)
     table.insert(logs,{log,color})
 end
