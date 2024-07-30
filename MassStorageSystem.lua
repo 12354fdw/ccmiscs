@@ -80,7 +80,7 @@ function render()
     for i,v in ipairs(original) do
         drivestats.setCursorPos(2,i+drivesY)
         if table.find(drives,v) then
-            drivestats.setTextColor(colors.green)
+            drivestats.setTextColor(colors.lime)
             local free = fs.getFreeSpace(v)
             local used = fs.getCapacity(v) - free
             tfree = tfree + free
@@ -138,7 +138,7 @@ function write(name,content)
             writing.close()
             table.insert(wdisks,v)
             if getPos > size then
-                log("wrote "..name.." to "..table.concat(wdisks,", "),colors.blue)
+                log("wrote "..name.." to "..table.concat(wdisks,", "),colors.lightBlue)
                 break
             end
         end
@@ -200,7 +200,7 @@ function communicationTask()
             local name = msg[2]
             local content = msg[3]
             if name and content then
-                log(id.." requested to "..mode.." on "..name,colors.green)
+                log(id.." requested to "..mode.." on "..name,colors.lime)
                 write(name,content)
             end
         end
@@ -208,7 +208,7 @@ function communicationTask()
         if mode == "read" then
             local name = msg[2]
             if name then
-                log(id.." requested to "..mode.." on "..name,colors.green)
+                log(id.." requested to "..mode.." on "..name,colors.lime)
                 local r = read(name)
                 rednet.send(id,r,"MSS")
             end
